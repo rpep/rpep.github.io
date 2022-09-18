@@ -1,7 +1,7 @@
 ---
 title: "Avoid breaking your Django migrations accidentally"
 date: 2022-09-18T19:18:14+01:00
-draft: true
+draft: false
 ---
 
 Django migrations can be very powerful, and allow you to effectively execute arbitrary code to modify your database, by migrating your database from one schema to another. A common pattern that beginners in Django often get wrong is to do something like:
