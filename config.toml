@@ -1,4 +1,4 @@
 baseURL = 'http://rpep.dev/'
 languageCode = 'en-us'
 title = 'rpep.dev'
-theme = "ananke"
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
