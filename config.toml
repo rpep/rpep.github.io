@@ -1,4 +1,37 @@
-baseURL = 'http://rpep.dev/'
-languageCode = 'en-us'
-title = 'rpep.dev'
+title = "rpep.dev"
+baseURL = "https://rpep.dev"
+languageCode = "en-gb"
 theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+resourceDir = "../resources"
+
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 6 # this is set low for demonstrating with dummy content. Set to a higher number
+googleAnalytics = ""
+enableRobotsTXT = true
+
+[languages]
+  [languages.en]
+    title = "rpep.dev"
+    weight = 1
+    contentDir = "content"
+    # languageDirection = 'rtl' for Right-To-Left languages
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[params]
+  text_color = ""
+  author = "Ryan Pepper"
+  favicon = ""
+  site_logo = ""
+  description = "Scientific software musings..."
+  # choose a background color from any on this page: https://tachyons.io/docs/themes/skins/ and preface it with "bg-"
+  background_color_class = "bg-moon-gray"
+  recent_posts_number = 3
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://linkedin.com/ryanpepper"
