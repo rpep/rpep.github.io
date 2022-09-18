@@ -1,0 +1,3 @@
+baseURL = 'http://rpep.dev/'
+languageCode = 'en-us'
+title = 'rpep.dev'
