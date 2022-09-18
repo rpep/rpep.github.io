@@ -3,12 +3,22 @@ title: "About"
 date: 2022-09-18T19:18:14+01:00
 menu:
   main:
-    weight: 1
+    weight: 2
 ---
 
-Hi, I'm Dr Ryan Pepper. I work as a software developer in Nottingham, UK.
+Hi, I'm Dr Ryan Pepper. I work as a software developer in Nottingham, UK. I'm interested in music, play guitar in a band, and follow Nottingham Forest.
+
+<p align="center">
+<img src="/images/me.jpg">
+</p>
 
 I currently lead a software team at Onyx Insight (BP Launchpad), where I work on wind turbine asset management and predictive maintenance software. Prior to this, I have worked at the University of Birmingham as a Senior Research Software Engineer, and at Siemens where I worked on a computational fluid dynamics and thermal modelling software package for the EDA industry.
+
+## Education
+
+<p align="center">
+<img src="/images/skyrmion.png">
+</p>
 
 I hold an MSci degree in Theoretical Physics from the University of Birmingham, and I subsequently completed my PhD under Prof Hans Fangohr at the University of Southampton, where I was part of the CDT in Next Generation Computational Modelling. My research primarily looked into computational methods for studying magnetic nanostructures, and quasiparticles that formed within these under the competition between different energy terms in the classical model of Micromagnetism.  My thesis is available [here](https://eprints.soton.ac.uk/456351/). As part of this, I contributed to several open source simulation packages, most notably [Fidimag](https://github.com/computationalmodelling/fidimag) and [Fmmgen](https://github.com/rpep/fmmgen).
 
