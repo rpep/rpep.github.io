@@ -2,7 +2,7 @@
 title: "Some simple rules for maintainable software"
 date: 2022-09-19T06:24:58+01:00
 draft: false
-featured_image: '/images/django.png'
+featured_image: '/images/stock-dev.jpg'
 ---
 
 Writing good software is an art rather than a science, and often decisions made quickly lead to a lot of pain down the line, because it is difficult to see the impact of them. With that said, here are a few of the rules I try and stick to when writing software in order to keep it maintainable and to allow course correction straightforwardly later.
@@ -27,4 +27,6 @@ I have seen it many times, but when builds and deployments are hard, it forces d
 
 ## 5. Make your project as standard as possible for the language you are using, and keep it up to date
 
-Every language has it's own conventions about how to set up a project. When you stray from this happy path, it's generally a recipe for confusion and frustration because new developers (both in experience and to the team) need to learn the intracacies of how your specific project has been set up, rather than being able to draw from tutorails or experience. Learning a new code base is hard enough without the added complexity of a hand written build system and strange folder structure.
+Every language has it's own conventions about how to set up a project. When you stray from this happy path, it's generally a recipe for confusion and frustration because new developers (both in experience and to the team) need to learn the intracacies of how your specific project has been set up, rather than being able to draw from tutorails or experience. Learning a new code base is hard enough without the added complexity of a hand written build system and strange folder structure. Many languages have 'cookie cutter' templates that you can use.
+
+Times do move on, however, and it's important to keep up to date with current practice for your language and framework. Failing to do so is likely to cause you difficulty in upgrading to new versions of the language, incorporate new dependencies and patterns into your project, and starts to become a barrier to entry to developers who have only learnt the framework in newer iterations.
