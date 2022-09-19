@@ -21,12 +21,20 @@ The software industry is well known for being an industry in which the barrier t
 
 I'm constantly surprised by the reluctance of many developers to split their code up either into independent modules or even into seperate files and functions. To me, large modules are a bit of a code smell, because they often lead to strong coupling between what could be independent components. On a practical level, it makes it hard to navigate the code base, and even harder to understand. Plus you end up doing a lot of scrolling around!
 
-## 4. Make deployment easy
+## 4. Document and test
+
+Testing and integration of code is so important, a failure to do it well is often a death knell to a project a year or two down the line, even if the initial roll out goes well. The complexity in software is so often in hidden requirements and expected behaviours, which is one of the reason rewrites or restructures of parts of the code base often become fraught. Testing should capture these requirements, and avoid accidental breaking of functionality.
+
+While I'm not a full proponent of TDD, I strongly believe that writing tests should be carried out alongside the initial feature development, because it often highlights inadequacies in the design. On many occasions, I've written a function that implements a feature and then realised that the API is difficult or clumsy to use. Likewise, when I come to a code base, I often find that shortcomings in this area are accompanied by a lack of tests...
+
+## 5. Make deployment easy
 
 I have seen it many times, but when builds and deployments are hard, it forces developers to work in a way that is both defensive, and slower. The QA process ends up being longer, because by the time a release is done, many changes may have been incorporated. This increases risk substantially. I do not think that any professional software developer today can avoid taking some interest in CI/CD systems.
 
-## 5. Make your project as standard as possible for the language you are using, and keep it up to date
+## 6. Make your project as standard as possible for the language you are using
 
 Every language has it's own conventions about how to set up a project. When you stray from this happy path, it's generally a recipe for confusion and frustration because new developers (both in experience and to the team) need to learn the intracacies of how your specific project has been set up, rather than being able to draw from tutorails or experience. Learning a new code base is hard enough without the added complexity of a hand written build system and strange folder structure. Many languages have 'cookie cutter' templates that you can use.
 
-Times do move on, however, and it's important to keep up to date with current practice for your language and framework. Failing to do so is likely to cause you difficulty in upgrading to new versions of the language, incorporate new dependencies and patterns into your project, and starts to become a barrier to entry to developers who have only learnt the framework in newer iterations.
+## 7. Keep core dependencies up to date
+
+Times move on, and it's important to keep up to date with current practice for your language and framework. Failing to do so is likely to cause you difficulty in upgrading to new versions, you may find that incorporating new dependencies and patterns into your project is hard or impossible, and it starts to become a barrier to entry to developers who have only learnt the framework in newer iterations.
