@@ -2,7 +2,7 @@
 title: "Best Practices for Django REST Framework Views"
 date: 2022-09-28T21:24:58+01:00
 draft: false
-featured_image: '/images/stock-dev.jpg'
+featured_image: '/images/drf-logo.png'
 ---
 
 Django REST Framework has two methods for writing APIs - function based views (similar for people coming from other frameworks like Flask or FastAPI), or class based views (which is more like the patterns in the ASP.NET and Spring frameworks). Class based views seem to have won out within the Django community, and so here we will focus on those, but even after making this choice, developers still need to decide which type of class based view is appropriate. 
