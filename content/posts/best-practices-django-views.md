@@ -55,12 +55,12 @@ from rest_framework.viewsets import ViewSet
 class BlogViewSet(ViewSet):
     def list(self, request):
         queryset = Blog.objects.all()
-        serializer = BlogListSerializer(queryset, many=True)
+        serializer_class = BlogListSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         instance = get_object_or_404(Blog, pk)
-        serializer = BlogDetailSerializer(instance)
+        serializer_class = BlogDetailSerializer(instance)
         return Response(serializer.data)
 ```
 
@@ -68,7 +68,13 @@ As before, we don't generally need to implement these boilerplate methods; we ca
 
 ```python3
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework.mixins import (
+    CreateModelMixin,
+    ListModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    DestroyModelMixin
+)
 
 class BlogViewSet(CreateModelMixin,
                   ListModelMixin,
@@ -77,7 +83,7 @@ class BlogViewSet(CreateModelMixin,
                   DestroyModelMixin,
                   GenericViewSet):
     queryset = Blog.objects.all
-    serializer = BlogSerializer
+    serializer_class = BlogSerializer
 ```
 
 A few more things to note here, however:
@@ -96,12 +102,15 @@ My experience has been that the best option here *really* depends on the case at
 ```python3
 class BlogViewSet(ViewSet):
     ... 
-    def get_serializer(self, request):
-        options = {'retrieve': BlogRetrieveSerializer, 'create': BlogCreateSerializer}
+    def get_serializer_class(self, request):
+        options = {
+            'retrieve': BlogRetrieveSerializer,
+            'list': BlogListSerializer
+        }
         if request.method in options.keys():
             return options[request.method]
         else:
-            return BlogListSerializer
+            return BlogCreateUpdateSerializer
 ```
 
 For querysets, I've generally found it easier to go back to writing a boilerplate method, or even splitting these out into a seperate services methods in order to allow better code reuse (particularly where a queryset might be used both for an API and Django serving pages) and testing:
