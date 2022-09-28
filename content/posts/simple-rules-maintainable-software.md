@@ -25,7 +25,7 @@ I'm constantly surprised by the reluctance of many developers to split their cod
 
 Testing and integration of code is so important, a failure to do it well is often a death knell to a project a year or two down the line, even if the initial roll out goes well. The complexity in software is so often in hidden requirements and expected behaviours, which is one of the reason rewrites or restructures of parts of the code base often become fraught. Testing should capture these requirements, and avoid accidental breaking of functionality.
 
-While I'm not a full proponent of TDD, I strongly believe that writing tests should be carried out alongside the initial feature development, because it often highlights inadequacies in the design. On many occasions, I've written a function that implements a feature and then realised that the API is difficult or clumsy to use. Likewise, when I come to a code base, I often find that shortcomings in this area are accompanied by a lack of tests...
+While I'm not a full proponent of TDD, I strongly believe that writing tests should be carried out alongside the initial feature development, because it often highlights inadequacies in the design. On many occasions, I've written a function that implements a feature and then realised that the API is difficult or clumsy to use. Likewise, when I come to a code base, I often find that shortcomings in this area on code bases I look at are accompanied by a lack of tests...
 
 ## 5. Make deployment easy
 
