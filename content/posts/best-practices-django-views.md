@@ -1,5 +1,5 @@
 ---
-title: "Best Practices for Django Views"
+title: "Best Practices for Django REST Framework Views"
 date: 2022-09-28T21:24:58+01:00
 draft: false
 featured_image: '/images/stock-dev.jpg'
