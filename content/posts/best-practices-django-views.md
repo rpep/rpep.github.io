@@ -27,7 +27,7 @@ class BlogDetailView(GenericAPIView):
 
 In practice, the boilerplate of these methods is often unnecessary if the logic is simple, and if the data for the respose can be constructed from a single Django QuerySet (potentially with annotations, filtering, etc). One of the beauties of Django (and similar frameworks like Ruby on Rails) is that you can get a lot of the CRUD methods implemented almost for free, and only implement more complicated logic only when you *need* to do so. For example, you could get all of the CRUD endpoints set up and working simply by instantiating the following classes:
 
-```
+```python3
 # views.py
 from rest_framework.views import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
@@ -49,7 +49,7 @@ Notice a few things here:
 
 ViewSets specifically aim to solve the problem of having to write multiple APIViews. Instead of writing a 'get' method twice, you write a 'retrieve' method to get a specific instance, and a 'list' method to get all instances. Similarly, rather than writing a 'post' method, you would write a 'create' method, and for 'put' a 'update' and 'patch' a 'partial_update' method. These are all magically translated to the appropriate endpoint location (e.g. `/api/blog` for list, `/api/blog/1` for retrieve) by a ['router'](https://www.django-rest-framework.org/api-guide/routers/). For example, you could write:
 
-```
+```python3
 from rest_framework.viewsets import ViewSet
 
 class BlogViewSet(ViewSet):
@@ -66,7 +66,7 @@ class BlogViewSet(ViewSet):
 
 As before, we don't generally need to implement these boilerplate methods; we can inherit from mixin classes that provide the methods for us:
 
-```
+```python3
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 
@@ -93,7 +93,7 @@ As we noted in the previous example, there are often times when you need to cust
 
 My experience has been that the best option here *really* depends on the case at hand. For serializers for example, I've found this pattern to be easy to use and understand for people new to the code base:
 
-```
+```python3
 class BlogViewSet(ViewSet):
     ... 
     def get_serializer(self, request):
@@ -105,16 +105,22 @@ class BlogViewSet(ViewSet):
 ```
 
 For querysets, I've generally found it easier to go back to writing a boilerplate method, or even splitting these out into a seperate services methods in order to allow better code reuse (particularly where a queryset might be used both for an API and Django serving pages) and testing:
-```
+
+```python3
 # services.py
 
 def get_complicated_blog_objects():
     return Blog.objects.prefetch_related(
         "author__firstname",
-        "author__lastname").filter(
+        "author__lastname"
+    ).filter(
         date__gte=datetime.date.today()-datetime.timedelta(days=30)
     ).annotate(
         author_name=F("author__firstname")+F("author__lastname")
     )
+
+# views.py
+class BlogViewSet(ViewSet):
+    queryset = get_complicated_blog_objects()
 ```
  
