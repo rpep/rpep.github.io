@@ -7,7 +7,7 @@ featured_image: '/images/drf-logo.png'
 
 Django REST Framework has two methods for writing APIs - function based views (similar for people coming from other frameworks like Flask or FastAPI), or class-based views (which is more like the patterns in the ASP.NET and Spring frameworks). Class-based views seem to have won out within the Django community, and so here we will focus on those, but even after making this choice, developers still need to decide which type of class-based view is appropriate. 
 
-# APIView
+# APIView and GenericAPIView
 
 Reading [the tutorial](https://www.django-rest-framework.org/tutorial/3-class-based-views/), the first thing a new developer in Django will encounter is the 'APIView' type of view. The developer can implement a method for each HTTP verb that they are interested in handling. The downside of this is that the developer needs to potentially implement *multiple* APIView classes in order to model a resource. For example, for a RESTful API representing a blog, you would generally want to be able to retrieve both a list of blog posts (usually with some key details like the ID, title and perhaps some other metadata like the date) at a location like `/api/blog`, as well as a specific blog post at `/api/blog/<id>`. To do this, you'd need to write two separate classes, each with their own GET action:
 ```python3
@@ -42,7 +42,7 @@ class BlogRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView)
 
 A few things to note here:
 * We've used specific DRF "Concrete view classes" here. There's a whole list of these in the [Django documentation](https://www.django-rest-framework.org/api-guide/generic-views/#concrete-view-classes). You should pick with care which actions you actually want to provide.
-* We add attributes to the class specifying the serializer and the queryset. These are not the only attributes it is possible to specify, but they are the most important and regularly used ones. This is because the concrete view classes inherit from `GenericAPIView` rather than APIView. This is a class that is designed to work directly with Django models, whereas using APIView directly is more appropriate when you want to write an endpoint that has no reference to the Django ORM at all. This makes a difference when generating an OpenAPISchema, as when serializers are specified on a class inheriting from GenericAPIView, the schema will be automatically generated based on the specified serializers.
+* We add attributes to the class specifying the serializer and the queryset. These are not the only attributes it is possible to specify, but they are the most important and regularly used ones. This is because the concrete view classes inherit from `GenericAPIView` rather than APIView. This is a class that is designed to work directly with Django models, whereas using APIView directly is more appropriate when you want to write an endpoint that has no reference to the Django ORM at all. This makes a difference when generating an OpenAPI schema, as when serializers are specified on a class inheriting from GenericAPIView, the schema will be automatically generated based on the specified serializers.
 * We've used a different serializer for creating/listing and retrieving/updating/deleting. This is a really common and important pattern. Generally, the information you display in a list should be a reduced subset of what is fetched when retrieving a single instance of a resource. Therefore, the serializer that you use to turn a Django model instance should almost always be different.
 
 ## ViewSets
@@ -87,14 +87,14 @@ class BlogViewSet(CreateModelMixin,
 ```
 
 A few more things to note here, however:
-* Like with APIView we inherit from GenericViewSet which is designed to work with the ORM and serializers rather than ViewSet when using Mixins. 
+* Like with APIView we end up with a class that inherits from GenericViewSet which is designed to work with the ORM and serializers rather than ViewSet when using Mixins. 
 * Rather than inheriting each mixin individually, you can inherit from 'collections' of these - for e.g. [ModelViewSet](https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset) or [ReadOnlyModelViewSet](https://www.django-rest-framework.org/api-guide/viewsets/#readonlymodelviewset). In practice, I prefer to specifically choose the subset mixins I actually need.
 * This is very much the way that the documentation pushes you to write a viewset. However, we've only been able to specify a *single* serializer, despite the fact we might need to use multiple ones.
 * The Mixins are not actually unique to the ViewSet - they can be used in the ordinary APIView type methods, but you would for e.g. need to call the 'list' or 'retrieve' method directly from your 'get' method.
 
 # Customising Behaviour
 
-As we noted in the previous example, there are often times when you need to customise the behaviour - there it was in having different serializers for different actions, but we can foresee examples like where an authenticated user might get a different set of results to an unauthenticated user. In these cases, there are effectively two options:
+As we noted in the previous example, there are often times when you need to customise the behaviour - in that example, it was in having different serializers for different actions, but we can foresee examples like where an authenticated user might get a different set of results to an unauthenticated user. In these cases, there are effectively two options:
 * We go back to writing our own boilerplate methods, and give up one the ones provided by DRF.
 * We don't specify properties like 'queryset' and 'serializer' when we inherit from APIView or ViewSets. We instead provide a method `get_<attribute_name>` that provides that attribute dynamically, for e.g. based on the user or other information we can garner from the request.
 
@@ -138,5 +138,5 @@ There are a lot of other methods like the `get_queryset` and `get_serializer` th
 ## What circumstances should I use an APIView, a GenericAPIView, a ViewSet or a GenericViewSet?
 
 Some rules of thumb I use day-to-day:
-* GenericViewSet and GenericAPIView (and classes that make use of them) should only be used where there is a correspondence directly to something representable as a QuerySet in the Django ORM. If you are for e.g. going off to another service to get some data which you return to the client, then APIView or ViewSet are the right choice.
-* Does my API correspond 1-2-1 with a Django ORM model and actions on it? If so, I generally use a ViewSet to avoid having to write two classes. A case where I might use an APIView instead might be where for e.g. I calculate some aggregate statistics (counts of objects, most recent object, etc.) where I only need a simple `get` method.
+* GenericViewSet and GenericAPIView (and classes that make use of them) should only be used where there is a correspondence directly to something directly representable as a single QuerySet in the Django ORM. If you are for e.g. going off to another service to get some data which you return to the client, or are combining multiple querysets across objects to construct a response, then APIView or ViewSet are the better choice.
+* Does my API correspond 1-2-1 with a Django ORM model and actions on it? If so, I generally use a ViewSet to avoid having to write two classes. A case where I might use an APIView instead might be where for e.g. I calculate some aggregate statistics (counts of objects, most recent object, etc.) where I only need a simple `get` method. I think this is easier to understand, because for such actions, generally 'list' and 'retrieve' as language around this doesn't really make sense.
