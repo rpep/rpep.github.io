@@ -1,7 +1,7 @@
 title = "rpep.dev"
 baseURL = "https://rpep.dev"
 languageCode = "en-gb"
-theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+theme = ["gohugo-theme-ananke"]
 resourceDir = "../resources"
 
 DefaultContentLanguage = "en"
