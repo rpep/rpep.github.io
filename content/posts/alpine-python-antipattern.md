@@ -1,5 +1,5 @@
 ---
-title: "Why using Alpinei Docker images and Python is (currently) an antipattern"
+title: "Why using Alpine Docker images and Python is (currently) an antipattern"
 date: 2022-12-06T17:30:00+01:00
 draft: false
 featured_image: '/images/drf-logo.png'
