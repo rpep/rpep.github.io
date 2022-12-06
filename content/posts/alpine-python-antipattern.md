@@ -56,7 +56,8 @@ Collecting six>=1.5
   Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
 Installing collected packages: pytz, sqlparse, six, numpy, asgiref, python-dateutil, Django, pandas
 Successfully installed Django-4.1.4 asgiref-3.5.2 numpy-1.23.5 pandas-1.5.2 python-dateutil-2.8.2 pytz-2022.6 six-1.16.0 sqlparse-0.4.3
-WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It
+is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
 
 [notice] A new release of pip available: 22.2.2 -> 22.3.1
 [notice] To update, run: pip install --upgrade pip
