@@ -1,5 +1,5 @@
 ---
-title: "Why using Alpine Docker images and Python is (currently) an antipattern"
+title: "Why using Alpine Docker images and Python is likely an antipattern for your project (right now)"
 date: 2022-12-06T17:30:00+01:00
 draft: false
 featured_image: '/images/drf-logo.png'
@@ -68,7 +68,7 @@ Successfully built cb5453eaac47
 
 The main thing of note is that when downloading the dependencies, generally, `pip` will default to installing a `wheel` distribution of the package if it is available. The wheels that it tries to download here have a suffix `manylinux_2_17_x86_64.manylinux2014_x86_64.whl` while others have a `none-any.whl` suffix. These suffixes indicate whether the downloaded package is a *platform specific* version of a Python package or not. For a general Python package containing only Python files (i.e. files with a `.py` extension), we can generally distribute those files and they will work straight out of the box, and these wheels have the `none-any.whl` ending. But many Python libraries also depend on extensions or libraries written in C/C++/etc. which cannot generally run anywhere because of dependencies on system libraries, most commonly the C standard library glibc which is forwards but not backwards compatible. The [`manylinux` PEP513](https://peps.python.org/pep-0513/) tag was started in order to allow providing users with the ability to install wheels which are distribution and architecture specific, rather than forcing package maintainers to include compiled dependencies for all possible permutations of system that a potential user might use.
 
-You might be asking now what relevance this has for Alpine Linux. Alpine does not, unlike most Linux distributions, use glibc as a shared library for compiled C dependencies. Instead, it uses the [MUSL library](https://musl.libc.org/), which is very lightweight but must be statically linked into every compiled binary. Unfortunately for Alpine fans, there is currently no support for Alpine wheels on the PyPi package repository, and because of this, all Python dependencies with extensions that depend on glibc must therefore be compiled from the source distribution, and so the Docker image must include a compiler. Indeed, here is a working copy of an Alpine Dockerfile for the same dependencies:
+You might be asking now what relevance this has for Alpine Linux. Alpine does not, unlike most Linux distributions, use glibc as a shared library for compiled C dependencies. Instead, it uses the [MUSL library](https://musl.libc.org/), which is very lightweight but must be statically linked into every compiled binary. A platform tag of `musllinux` exists to signal wheels that support it. Unfortunately for Alpine fans, there is currently very poor support for Alpine wheels on the PyPi package repository for most major packages, and because of this, almost all Python dependencies with C extensions must therefore be compiled from the source distribution. Indeed, here is a working copy of an Alpine Dockerfile for the same dependencies:
 ```docker
 FROM python:3.10.8-alpine3.17
 
@@ -95,10 +95,13 @@ Building wheels for collected packages: pandas, numpy
 
 In terms of build time and size for the final image, what sort of impact does this have? On my machine, with the Python images cached locally (as they would be on most systems where you're doing this sort of build) before starting the build, I get the following results:
 
-| Base Image Tag    | Build time  | Image size (GiB) |
-|-------------------|-------------|------------------|
-| 3.10.8-bullseye   | 00:         |                  |
-| 3.10.8-alpine3.17 | 00:23:40    |                  |
+| Base Image Tag      | Build time    | Base Image Size (MB) | Image size (MB)   |
+|---------------------|---------------|----------------------|-------------------| 
+| 3.10.8-bullseye     | 00:00:26      |                921.1 |            1118.7 |
+| 3.10.8-alpine3.17   | 00:23:40      |                194.5 |              50.0 |
+
+So you can see that while it clearly wins on build size, the build time is a whopping 54x slower in my totally unscientific test.
+
 ## Caveats
 
 Critics might say that I've ommitted a few things here which I'll try and address:
@@ -110,4 +113,3 @@ I mean, yes, but that's another thing to set up and maintain.
 ### "We could install the Python packages from apk rather than from PyPi"
 
 Again, yes, but that's no dice if you want a version that is not available from the Alpine package repository, and the only versions of the Python packages I've demoed here [are only in the 'community' repository](https://pkgs.alpinelinux.org/packages?name=py3-numpy&branch=v3.17&repo=&arch=&maintainer=) which could introduce a risk that in a corporate environment might not be one you'd want to take.
-
