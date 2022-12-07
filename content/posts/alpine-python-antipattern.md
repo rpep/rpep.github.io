@@ -98,7 +98,7 @@ In terms of build time and size for the final image, what sort of impact does th
 | Base Image Tag      | Build time    | Base Image Size (MB) | Image size (MB)   |
 |---------------------|---------------|----------------------|-------------------| 
 | 3.10.8-bullseye     | 00:00:26      |                921.1 |            1118.7 |
-| 3.10.8-alpine3.17   | 00:23:40      |                194.5 |              50.0 |
+| 3.10.8-alpine3.17   | 00:23:40      |                 50.0 |             194.5 |
 
 So you can see that while it clearly wins on build size, the build time is a whopping 54x slower in my totally unscientific test. In time, I'd expect that more and more packages will add MUSL support in their build pipelines. But whether it will reach a critical mass is questionable - it's taken a long time to add wheels that support ARM architectures for most major packages, and the change required here is pretty similar.
 
