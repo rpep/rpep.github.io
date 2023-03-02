@@ -134,15 +134,15 @@ from mathematical_routines.cfunctions import mathematical_routine_c
 
 ## Benchmarking
 
-You can see below the benchmarks from my pretty ancient 2-core 2013 Macbook. The code used to generate these results is available [here]()
+You can see below the benchmarks testing the function for 10^N elements, run fairly unscientifically on my pretty ancient 2-core 2013 Macbook. The code used to generate these results is available [here](https://github.com/rpep/improving-python-performance)
 
-|   N |                       Numpy  |                   Numpy (Optimised) |                        Numba |               Cython + C |
-|----:|-----------------------------:|------------------------------------:|-----------------------------:|-------------------------:|
-|   4 |                    0.007539  |                          0.00552827 |                   0.00631435 |                0.0099843 |
-|   5 |                    0.0822677 |                          0.0668484  |                   0.0622144  |                0.0680254 |
-|   6 |                    0.992097  |                          0.705271   |                   0.531437   |                0.533711  |
-|   7 |                    9.51496   |                          6.7119     |                   5.18282    |                5.33702   |
-|   8 |                  170.29      |                         99.1852     |                  53.5006     |               53.9295    |
+|   $10^N$ |                       Numpy  |                   Numpy (Optimised) |                        Numba |               Cython + C |
+|---------:|-----------------------------:|------------------------------------:|-----------------------------:|-------------------------:|
+|   4      |                    0.007539  |                          0.00552827 |                   0.00631435 |                0.0099843 |
+|   5      |                    0.0822677 |                          0.0668484  |                   0.0622144  |                0.0680254 |
+|   6      |                    0.992097  |                          0.705271   |                   0.531437   |                0.533711  |
+|   7      |                    9.51496   |                          6.7119     |                   5.18282    |                5.33702   |
+|   8      |                  170.29      |                         99.1852     |                  53.5006     |               53.9295    |
 
 ![Benchmark](/images/plot.jpeg)
 
