@@ -1,8 +1,8 @@
 ---
 title: "Improving Python performance for numerical routines"
-date: 2022-09-19T06:24:58+01:00
+date: 2023-03-02T21:57:58+00:00
 draft: false
-featured_image: '/images/stock-dev.jpg'
+featured_image: '/images/car.jpg'
 ---
 
 When writing numerical software in Python, there is a somewhat overwhelming array of options for tackling performance issues. From experience, it's very hard to actually evaluate which of these options is "best" for performance without actually trying them in a specific scenario, and to understand what is happening requires an understanding of both the Python, NumPy, and lower level language's call stack, the input arguments of the particular routine, and the system on which the code is designed to run on. In this blog post I'll walk through a few different strategies to improve a performance critical routine and compare the perforamnce and the advantages and disadvantages.
@@ -18,7 +18,7 @@ def mathematical_routine_numpy(x: np.ndarray[np.float64], output: np.ndarray[np.
     output[:] = np.sqrt(input*input/12)
 ```
 
-I've used NumPy here by default rather than using Python lists and for loops. The main benefit to performance of using NumPy over pure Python is that NumPy arrays are contiguous in memory (all elements are stored consecutively), and it utilises methods written in compiled languages which use single-instruction multiple-data (SIMD) in order perform operations. Modern CPUs of all architectures (x86-64, ARM, etc.) have additional instruction sets that allow vector operations, so for e.g. when multiplying two arrays together, depending on exactly the datatype, the instruction sets your CPU has (e.g. AVX2, AVX512 on Intel, SVE on ARM), and what target architecutre NumPy was compiled against, it might take 2, 4 or 8 values at a time to operate on.
+I've used NumPy here by default rather than using Python lists and for loops. The main benefit to performance of using NumPy over pure Python is that NumPy arrays are contiguous in memory (all elements are stored consecutively), and it utilises methods written in compiled languages which use single-instruction multiple-data (SIMD) in order perform operations. Modern CPUs of all architectures (x86-64, ARM, etc.) have additional instruction sets that allow vector operations, so for e.g. when multiplying two arrays together, depending on exactly the datatype, the instruction sets your CPU has (e.g. AVX2, AVX512 on Intel, SVE on ARM), and what target architecture NumPy was compiled against, it might take 2, 4 or 8 values at a time to operate on. 
 
 ## Improving the NumPy routine
 
@@ -134,6 +134,18 @@ from mathematical_routines.cfunctions import mathematical_routine_c
 
 ## Benchmarking
 
-In terms of simplicity, there's something to be said for pure NumPy, though it's clear that to get the best out of it, you have to be very careful and understand exactly what might happen for a given operation, which we showed by rearchitecting the method to prevent temporary arrays from being allocated. We get a significant additional performance benefit from using Numba and C even though the code is much the same, because we traverse over the input array exactly once rather than repeatedly, and the compiler will take care of SIMD optimisations for us through autovectorization. 
+You can see below the benchmarks from my pretty ancient 2-core 2013 Macbook. The code used to generate these results is available [here]()
 
-Between Numba and C, it's clear that Numba has a simplicity in tooling and they are broadly equivalent in terms of performance. Distributing a Python library that uses Numba is no different to any other Python library, though it's worth considering that LLVM which is needed for the JIT compilation is a fairly significant runtime dependency. It is now possible to [ahead of time compile](https://numba.readthedocs.io/en/stable/reference/aot-compilation.html) for Numba accelerated routines, which reduces the 'time to start' when using them, and removes the need for LLVM at runtime, much as a C extension doesn't require a compiler at runtime. Where Numba does fall down compared to using C/etc. is when you want to make use of external C libraries that already exist - while it is possible to expose and use them through Numba, I've found that it's considerably simpler to do this in Cython or Pybind11.
+|   N |                       Numpy  |                   Numpy (Optimised) |                        Numba |               Cython + C |
+|----:|-----------------------------:|------------------------------------:|-----------------------------:|-------------------------:|
+|   4 |                    0.007539  |                          0.00552827 |                   0.00631435 |                0.0099843 |
+|   5 |                    0.0822677 |                          0.0668484  |                   0.0622144  |                0.0680254 |
+|   6 |                    0.992097  |                          0.705271   |                   0.531437   |                0.533711  |
+|   7 |                    9.51496   |                          6.7119     |                   5.18282    |                5.33702   |
+|   8 |                  170.29      |                         99.1852     |                  53.5006     |               53.9295    |
+
+![Benchmark](/images/plot.jpeg)
+
+Note that here, the JIT compilation stage was not counted in the metrics for Numba. It's a clear draw between Numba and Cython, with our optimised Numpy still significantly better than the naively written code. In terms of simplicity, there's something to be said for pure NumPy, though it's clear that to get the best out of it, you have to be very careful and understand exactly what might happen for a given operation, which we showed by re-architecting the method to prevent temporary arrays from being allocated. We get a significant additional performance benefit from using Numba and C even though the code is much the same, because we traverse over the input array exactly once rather than repeatedly, and the compiler will take care of SIMD optimisations for us through autovectorization. 
+
+Between Numba and C, it's clear that Numba has a simplicity in tooling and they are broadly equivalent in terms of performance. Distributing a Python library that uses Numba is no different to any other Python library, though it's worth considering that LLVM which is needed for the JIT compilation is a fairly significant runtime dependency and also can't be used on some of the more obscure processor architectures. It is now possible to [ahead of time compile](https://numba.readthedocs.io/en/stable/reference/aot-compilation.html) for Numba accelerated routines, which reduces the 'time to start' when using them, and removes the need for LLVM at runtime, much as a C extension doesn't require a compiler at runtime. Where Numba does fall down compared to using C/etc. is when you want to make use of external C libraries that already exist - while it is possible to expose and use them through Numba, I've found that it's considerably simpler to do this in Cython or Pybind11. Both options are feasible for releasing code that has been somewhat obfuscated through compilation, which is useful in the commercial world.
