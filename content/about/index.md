@@ -6,13 +6,13 @@ menu:
     weight: 2
 ---
 
-Hi, I'm Dr Ryan Pepper. I work as a software developer in Nottingham, UK. I'm interested in music, play guitar in a band, and follow Nottingham Forest.
+Hi, I'm Dr Ryan Pepper. I work as a software engineer in Nottingham, UK. I'm interested in music, play guitar in a band, and follow Nottingham Forest.
 
 <p align="center">
 <img src="/images/me.jpg">
 </p>
 
-I currently lead a software team at Onyx Insight (BP Launchpad), where I work on wind turbine asset management and predictive maintenance software. Prior to this, I have worked at the University of Birmingham as a Senior Research Software Engineer, and at Siemens where I worked on a computational fluid dynamics and thermal modelling software package for the EDA industry.
+I currently work as a software engineer at Siemens on the Senseye Predictive Maintenance software platform for diagnosing problems with factory machinery. Previously I lead a software team at Onyx Insight (BP Launchpad), where I worked on wind turbine asset management and predictive maintenance software. Prior to this, I have worked at the University of Birmingham as a Senior Research Software Engineer, and at Siemens where I worked on a computational fluid dynamics and thermal modelling software package for the EDA industry. I have a passion for working on software in the Engineering industry where there are real practical impacts from the solutions.
 
 ## Education
 
