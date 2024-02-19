@@ -36,19 +36,20 @@ There are some great third party packages that make use of this in clever ways. 
 ## Receiver methods
 
 For the most part, receiver methods are used to implement object-like behaviour on structs, for e.g.:
-```
+```go
 func (r Rectangle) Area() float64 {
     return r.Length * r.Width
 }
 ```
 
 They can also be used to add methods that operate on composite types however, which is quite fun:
-
+```go
 func (rs []Rectangle) Print() {
     for i := range(rs) {
         fmt.Printf("%s x %s\n", rs[i].Length, rs[i].Width)
     }
 }
+```
 
 # The not so good
 
