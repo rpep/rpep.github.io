@@ -42,7 +42,7 @@ func (r Rectangle) Area() float64 {
 }
 ```
 
-They can also be used to add methods that operate on composite types however, which is quite fun:
+They're much more flexible than they first appear however, as they can also be used to add methods that operate on composite types which is quite fun:
 ```go
 func (rs []Rectangle) Print() {
     for i := range(rs) {
@@ -51,14 +51,9 @@ func (rs []Rectangle) Print() {
 }
 ```
 
+It's even possible to add receivers for built in types.
+
 # The not so good
-
-## Dependency management
-
-I'm really not keen on the way that Go dependency management is linked to hard-coded URLs for package names. It can be frustrating when/if things inevitably move around, and I find that it also makes package names annoyingly long within the IDE.
-
-More than once in my career, I've moved source control systems (and not just between Git servers - additionally between IBM ClearCase to Git, Mercurial to Git...). When package names have these coupled to the source control system, it causes issues, and it makes for quite noisy commits too. Going from `bitbucket.org/rpep/packagename` to `github.com/rpep/packagename`
-would require changes to at least the `go.mod` and any source files referencing that package, but not only that, it breaks links that each library has to it's own dependencies if they're also hosted on a different platform. This means practically needing to add `replace` directives to your project to stop dependency resolution from failing. Vendoring your dependencies mitigates this somewhat, but it just delays the pain.
 
 ## Simple but sometimes clunky
 
@@ -82,6 +77,40 @@ But you can't spread more than one item into this:
 ```
 Print(...list1, ...list2)
 ```
+
+## Where art thou enums...?
+
+The closest you can get to defining an enum in Go is creating your own type:
+
+```
+type MyFakeEnum string
+
+const (
+   MyFakeEnumA MyFakeEnum "a"
+   MyFakeEnumB MyFakeEnum "b"
+   MyFakeEnumC MyFakeEnum "c"
+)
+```
+Syntactically this gets you somewhere close to an enum, but without any of the type safety a true enum would give you. For example, it's possible to do the following:
+
+```
+func MyFunc(val MyFakeEnum) {
+    ...
+}
+
+MyFunc("some value")
+```
+
+without any compiler error. Similarly, things like the built-in JSON parser will not error when marshalling into a struct, since the true type of the field is a string.
+
+
+
+## Dependency management
+
+I'm really not keen on the way that Go dependency management is linked to hard-coded URLs for package names. It can be frustrating when/if things inevitably move around, and I find that it also makes package names annoyingly long within the IDE.
+
+More than once in my career, I've moved source control systems (and not just between Git servers - additionally between IBM ClearCase to Git, Mercurial to Git...). When package names have these coupled to the source control system, it causes issues, and it makes for quite noisy commits too. Going from `bitbucket.org/rpep/packagename` to `github.com/rpep/packagename`
+would require changes to at least the `go.mod` and any source files referencing that package, but not only that, it breaks links that each library has to it's own dependencies if they're also hosted on a different platform. This means practically needing to add `replace` directives to your project to stop dependency resolution from failing. Vendoring your dependencies mitigates this somewhat, but it just delays the pain.
 
 
 
