@@ -1,6 +1,6 @@
 ---
 title: "Go first impressions"
-date: 2024-02-01T21:57:58+00:00
+date: 2024-02-22T20:00:00+00:00
 draft: false
 featured_image: "/images/go.jpeg"
 ---
