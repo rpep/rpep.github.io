@@ -92,17 +92,17 @@ func Print(args... string) {
 }
 ```
 
-This can be called by unpacking a list using the spread operatorlike so:
+This can be called by unpacking a list using the spread operator like so:
 
 ```go
 list := []string{"a", "b", "c"}
-Print(...list)
+Print(list...)
 ```
 
 But you can't spread more than one item into this:
 
 ```go
-Print(...list1, ...list2)
+Print(list1..., list2...)
 ```
 
 ## Where art thou enums...?
