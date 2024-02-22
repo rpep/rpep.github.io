@@ -46,11 +46,32 @@ func (r Rectangle) Area() float64 {
 They're much more flexible than they first appear however, as they can also be used to add methods that operate on composite types which is quite fun:
 
 ```go
-func (rs []Rectangle) Print() {
+type Rectangles []Rectangle
+
+func (rs Rectangles) Print() {
     for i := range(rs) {
-        fmt.Printf("%s x %s\n", rs[i].Length, rs[i].Width)
+        fmt.Printf("%f x %f\n", rs[i].Length, rs[i].Width)
     }
 }
+
+func main() {
+	rectangles := Rectangles{
+		{
+			Length: 1.0,
+			Width:  2.0,
+		},
+		{
+			Length: 2.0,
+			Width:  4.0,
+		},
+	}
+
+	rectangles.Print()
+}
+... 
+
+
+
 ```
 
 It's even possible to add receivers for built in types.
