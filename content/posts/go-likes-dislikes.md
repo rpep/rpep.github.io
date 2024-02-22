@@ -33,6 +33,28 @@ type Rectangle struct {
 
 There are some great third party packages that make use of this in clever ways. The [validator](https://github.com/go-playground/validator) library lets you use additional tags for validation of struct members.
 
+## Receiver methods
+
+For the most part, receiver methods are used to implement object-like behaviour on structs, for e.g.:
+
+```go
+func (r Rectangle) Area() float64 {
+    return r.Length * r.Width
+}
+```
+
+They're much more flexible than they first appear however, as they can also be used to add methods that operate on composite types which is quite fun:
+
+```go
+func (rs []Rectangle) Print() {
+    for i := range(rs) {
+        fmt.Printf("%s x %s\n", rs[i].Length, rs[i].Width)
+    }
+}
+```
+
+It's even possible to add receivers for built in types.
+
 # The not so good
 
 ## Simple but sometimes clunky
@@ -49,7 +71,7 @@ func Print(args... string) {
 }
 ```
 
-This can be called by unpacking a list using the spread operator like so:
+This can be called by unpacking a list using the spread operatorlike so:
 
 ```go
 list := []string{"a", "b", "c"}
