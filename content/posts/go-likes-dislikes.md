@@ -73,14 +73,14 @@ func Print(args... string) {
 
 This can be called by unpacking a list using the spread operatorlike so:
 
-```
+```go
 list := []string{"a", "b", "c"}
 Print(...list)
 ```
 
 But you can't spread more than one item into this:
 
-```
+```go
 Print(...list1, ...list2)
 ```
 
@@ -88,7 +88,7 @@ Print(...list1, ...list2)
 
 The closest you can get to defining an enum in Go is creating your own type:
 
-```
+```go
 type MyFakeEnum string
 
 const (
@@ -100,7 +100,7 @@ const (
 
 Syntactically this gets you somewhere close to an enum, but without any of the type safety a true enum would give you. For example, it's possible to do the following:
 
-```
+```go
 func MyFunc(val MyFakeEnum) {
     ...
 }
