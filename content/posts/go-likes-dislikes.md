@@ -74,7 +74,7 @@ func main() {
 
 ```
 
-It's even possible to add receivers for built in types.
+It's even possible to add receivers for built in types by labelling them with your own name in this way.
 
 # The not so good
 
