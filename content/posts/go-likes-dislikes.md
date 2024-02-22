@@ -2,7 +2,7 @@
 title: "Things I like and dislike about Go"
 date: 2024-02-01T21:57:58+00:00
 draft: false
-featured_image: "/images/car.jpg"
+featured_image: "/images/go.jpeg"
 ---
 
 Go first came onto my radar about 9 years ago when I came across [MuMax](https://github.com/mumax/3) during my PhD studies. Other than playing with modifications to this and a few Lambda functions, I've not had much
