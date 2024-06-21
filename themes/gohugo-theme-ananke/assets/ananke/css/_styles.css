@@ -18,3 +18,7 @@
 .nested-links a{
   overflow-wrap: break-word;
 }
+
+code[data-lang=text] {
+    text-wrap: wrap;
+}
