@@ -38,8 +38,5 @@ enableRobotsTXT = true
   recent_posts_number = 5
 
 [[params.ananke_socials]]
-name = "linkedin"
-url = "https://linkedin.com/in/ryanpepper"
-[[params.ananke_socials]]
 name = "github"
 url = "https://github.com/rpep"
