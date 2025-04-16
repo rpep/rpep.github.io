@@ -22,8 +22,9 @@ Nowadays, I think it would be pretty difficult to argue against the fact that Py
 * TensorFlow, PyTorch, and JAX all use lazy evaluation and static/dynamic graph compilation to shift real work onto highly optimized backends.
 * Cython, PyBind11, and increasingly Rust via PyO3 allow developers to write performance-critical components outside Python and expose them cleanly to the high-level API.
 * Dask and Ray provide distributed or parallel abstractions without requiring users to change how they write Python.
+* Libraries as a result are getting faster and in some cases have inspired more performant alternatives - for e.g. in the case of Pandas and Polars.
 
-As a result, the libraries have just got better and better in both functionality and performance terms. Python is now just part of the furniture in these areas.
+As a result, the library ecosystem in the language has just got better and better in both functionality and performance terms. Python is now just part of the furniture.
 
 # ... but great for glue code, less so for other things
 
@@ -71,4 +72,4 @@ At the same time, some popular libraries have really driven forwards the typing 
 
 # Conclusion
 
-This isn't a totally comprehensive summary of the changes - it's mostly been borne out by what I've seen in the areas I've worked - particularly in scientific computing and data pipelines. In these areas in particular, Python has gone from being a bit of a plucky upstart to become a clear first choice for many when starting a new project, even in spite of some frustrations. After 10 years, I still find Python a fun language to use, and while I've picked up new languages like Go in that time as well, for anything personal, I'd still largely jump to Python since I find it expressive, capable and easy to work with, in spite of it's sometimes rough edges.
+This isn't a totally comprehensive summary of the changes - it's mostly been borne out by what I've seen in the areas I've worked - particularly in scientific computing, API development and in data pipelines. It feels to me that Python has gone from being a bit of a plucky upstart to become a clear mainstream first choice for many when starting a new project, even in spite of some rough edges, particularly around packaging. After 10 years, I still find Python a fun language to use, and while I've picked up new languages like Go in that time as well, for anything personal, I'd still largely jump to it since I find it expressive, capable and easy to work with, with great libraries.
