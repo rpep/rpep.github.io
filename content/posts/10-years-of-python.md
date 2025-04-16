@@ -2,7 +2,7 @@
 title: "10 years of Python - a personal retrospective from 2015 to 2025"
 date: 2025-04-16T20:35:58+00:00
 draft: false
-featured_image: '/images/car.jpg'
+featured_image: '/images/python-rainbow.png'
 ---
 
 
@@ -48,7 +48,9 @@ Today, I think it's fair to say that there's been a bit of an explosion of compe
 * GPU acceleration (CUDA, ROCm, etc.), and common use of the language on other platforms (x86_64, ARM, even POWER9 in one of my roles) introduces a hardware axis to dependency resolution which package authors have to deal with when publishing their code.
 * Additionally, the Python ecosystem lacks a centralized, opinionated build system (like Cargo in Rust), leading to fragmentation across tools like setuptools, poetry, flit, and uv.
 
-I do tend to think that first three of these constraints make comparisons with other ecosystems somewhat unfair, even though I've had my fair share of dealing with packaging and installation problems.
+I do tend to think that first three of these constraints make comparisons with other ecosystems somewhat unfair, even though I've had my fair share of dealing with packaging and installation problems. With all that said, the experience to day is a world away from where it was in 2015, which has made it a much better experience for developers, particularly if you're on Windows.
+
+![DEVELOPERS](/images/steve-ballmer.gif)
 
 # Language convergence - the Python 2 to 3 transition
 
