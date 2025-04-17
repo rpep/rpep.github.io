@@ -5,7 +5,7 @@ draft: false
 featured_image: '/images/python-rainbow.png'
 ---
 
-I first started touching Python while coming towards the end of a Master's project, about ten years ago. Much has changed over that period, and looking back, it's kind of amazing how far we've come. Python has it's fair share of critics out there on the internet, and obviously no tool exists in a vacuum, so many of the comparisons and criticisms are warranted as other languages and tooling have come along, but personally, I still find it incredibly powerful.
+I first started touching Python while coming towards the end of a Master's project, about ten years ago. Much has changed over that period, and looking back, it's kind of amazing how far we've come. Python has its fair share of critics out there on the internet, and obviously no tool exists in a vacuum, so many of the comparisons and criticisms are warranted as other languages and tooling have come along, but personally, I still find it incredibly powerful.
 
 I thought it might be a nice exercise to show how much things have changed for the better over that period by picking out some specific evolutions that have happened over that time period.
 
