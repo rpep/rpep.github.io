@@ -12,7 +12,7 @@ Hi, I'm Dr Ryan Pepper. I work as a software engineer in Nottingham, UK. I'm int
 <img src="/images/me.jpg">
 </p>
 
-I currently work as a software engineer at Siemens on the Senseye Predictive Maintenance software platform for diagnosing problems with factory machinery. Previously I lead a software team at Onyx Insight (BP Launchpad), where I worked on wind turbine asset management and predictive maintenance software. Prior to this, I have worked at the University of Birmingham as a Senior Research Software Engineer, and at Siemens where I worked on a computational fluid dynamics and thermal modelling software package for the EDA industry. I have a passion for working on software in the Engineering industry where there are real practical impacts from the solutions.
+I currently work as a Principal Software Engineer at Autodesk where I work on large scale data pipelines for building generative models for CAD geometries. Previously I have worked in a variety of roles in the intersection of engineering, mathematics, physics and software across academia and industry, at companies such as Siemens and Onyx Insight.
 
 ## Education
 
