@@ -14,6 +14,8 @@ Hi, I'm Dr Ryan Pepper. I work as a software engineer in Nottingham, UK. I'm int
 
 I currently work as a Principal Software Engineer at Autodesk where I work on large scale data pipelines for building generative models for CAD geometries. Previously I have worked in a variety of roles in the intersection of engineering, mathematics, physics and software across academia and industry, at companies such as Siemens and Onyx Insight.
 
+I am a charity trustee at the [Society for Research Software Engineering](https://society-rse.org/). I am passionate about the role that good software practices can play in scientific research.
+
 ## Education
 
 <p align="center">
