@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="intro">
+  <img class="avatar" src="/images/me.png" alt="Ryan Pepper">
+  <div>
+    <h1>Ryan Pepper</h1>
+    <p>{{ .Content | plainify }}</p>
+    <p class="meta">Principal Software Engineer in Nottingham, UK. Large scale data pipelines, scientific software, and the odd guitar.</p>
+  </div>
+</section>
+<h2>Recent posts</h2>
+{{ partial "post-list.html" (first (site.Params.recent_posts_number | default 5) (where site.RegularPages "Section" "posts")) }}
+<p><a href="{{ "posts/" | relURL }}">All posts &rarr;</a></p>
+{{ end }}
