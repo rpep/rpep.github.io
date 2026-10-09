@@ -1,0 +1,44 @@
+# Source: Google Scholar profile. Duplicates and Zenodo datasets removed.
+# Author lists are truncated (as on Scholar) where they end in "et al."
+- title: "Thermal stability and topological protection of skyrmions in nanotracks"
+  authors: "D Cortes-Ortuno, W Wang, M Beg, RA Pepper, MA Bisotti, R Carey, et al."
+  venue: "Scientific Reports 7, 4060"
+  year: 2017
+- title: "User interfaces for computational science: A domain specific language for OOMMF embedded in Python"
+  authors: "M Beg, RA Pepper, H Fangohr"
+  venue: "AIP Advances 7 (5)"
+  year: 2017
+- title: "Ground state skyrmion and helical states in confined FeGe nanostructures"
+  authors: "RA Pepper, M Beg, D Cortes-Ortuno, R Carey, M Vousden, W Wang, M Albert, et al."
+  venue: "2017 IEEE International Magnetics Conference (INTERMAG)"
+  year: 2017
+- title: "Fidimag - A Finite Difference Atomistic and Micromagnetic Simulation Package"
+  authors: "MA Bisotti, D Cortes-Ortuno, R Pepper, W Wang, M Beg, T Kluyver, et al."
+  venue: "Journal of Open Research Software 6 (1)"
+  year: 2018
+- title: "Proposal for a micromagnetic standard problem for materials with Dzyaloshinskii-Moriya interaction"
+  authors: "D Cortes-Ortuno, M Beg, V Nehruji, L Breth, R Pepper, T Kluyver, et al."
+  venue: "New Journal of Physics 20 (11), 113015"
+  year: 2018
+- title: "Skyrmion states in thin confined polygonal nanostructures"
+  authors: "RA Pepper, M Beg, D Cortes-Ortuno, T Kluyver, MA Bisotti, R Carey, et al."
+  venue: "Journal of Applied Physics 123 (9)"
+  year: 2018
+  url: "https://doi.org/10.1063/1.5022567"
+- title: "Current-induced instability of domain walls in cylindrical nanowires"
+  authors: "W Wang, Z Zhang, RA Pepper, C Mu, Y Zhou, H Fangohr"
+  venue: "Journal of Physics: Condensed Matter 30 (1), 015801"
+  year: 2018
+- title: "Stable and manipulable Bloch point"
+  authors: "M Beg, RA Pepper, D Cortes-Ortuno, B Atie, MA Bisotti, G Downing, et al."
+  venue: "Scientific Reports 9 (1), 7959"
+  year: 2019
+- title: "fmmgen: Automatic Code Generation of Operators for Cartesian Fast Multipole and Barnes-Hut Methods"
+  authors: "RA Pepper, H Fangohr"
+  venue: "arXiv preprint arXiv:2005.12351"
+  year: 2020
+  url: "https://arxiv.org/abs/2005.12351"
+- title: "Confinement of Skyrmions in Nanoscale FeGe Device-like structures"
+  authors: "A Harrison, J Loudon, R Pepper, M Birch, H Fangohr, P Midgley, et al."
+  venue: "American Chemical Society"
+  year: 2022

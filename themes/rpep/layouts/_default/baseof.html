@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ site.Params.description }}{{ end }}{{ end }}">
+  {{ hugo.Generator }}
+  {{ $production := eq (getenv "HUGO_ENV") "production" }}
+  <meta name="robots" content="{{ if $production }}index, follow{{ else }}noindex, nofollow{{ end }}">
+  {{ with .OutputFormats.Get "RSS" }}
+  <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ site.Title }}">
+  {{ end }}
+  {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/schema.html" . }}
+  {{ if $production }}{{ template "_internal/google_analytics.html" . }}{{ end }}
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+    <nav>
+      {{ range site.Menus.main }}
+      <a href="{{ .URL }}"{{ if $.HasMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="site-footer">
+    <span>&copy; {{ now.Year }} {{ site.Params.author }}</span>
+    <span>
+      {{ range site.Params.ananke_socials }}<a href="{{ .url }}">{{ .name }}</a> {{ end }}
+      <a href="{{ "index.xml" | relURL }}">rss</a>
+    </span>
+  </footer>
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</body>
+</html>

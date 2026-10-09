@@ -1,0 +1,14 @@
+<ul class="post-list">
+  {{ range . }}
+  <li>
+    <a class="post-link" href="{{ .RelPermalink }}">
+      {{ with .Params.featured_image }}<img class="thumb" src="{{ . }}" alt="" loading="lazy">{{ end }}
+      <span class="post-info">
+        <span class="post-title">{{ .Title }}</span>
+        <span class="meta">{{ .Date.Format "2 January 2006" }} &middot; {{ .ReadingTime }} min read</span>
+        <span class="summary">{{ .Summary | plainify | truncate 160 }}</span>
+      </span>
+    </a>
+  </li>
+  {{ end }}
+</ul>

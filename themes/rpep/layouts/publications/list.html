@@ -1,0 +1,19 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ $year := 0 }}
+{{ range sort site.Data.publications "year" "desc" }}
+  {{ if ne .year $year }}
+    {{ if ne $year 0 }}</ul>{{ end }}
+    <h2>{{ .year }}</h2>
+    <ul class="pub-list">
+    {{ $year = .year }}
+  {{ end }}
+  <li>
+    <span class="pub-title">{{ if .url }}<a href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</span>
+    <span class="pub-authors">{{ .authors | replaceRE "(R\\.? ?A\\.? Pepper|R Pepper|RA Pepper)" "<strong>$1</strong>" | safeHTML }}</span>
+    <span class="meta">{{ .venue }}</span>
+  </li>
+{{ end }}
+{{ if ne $year 0 }}</ul>{{ end }}
+{{ end }}
